@@ -48,7 +48,6 @@
     .deskripsi {
         font-size: 15px;
         color: #555;
-        font-style: italic;
         margin-bottom: 30px;
     }
 
@@ -86,9 +85,9 @@
     <div class="profile-layout">
     <img src="{{ $student['foto'] }}" alt="Foto {{ $student['nama'] }}">
 
-    <div class="nama">
-        {{ $student['nama'] }}
-    </div>
+    <div class="username">{{ $student['username'] }} </div>
+
+    <div class="nama"> {{ $student['nama'] }}</div>
 
     <div class="kelas-hobi">{{ $student['kelas'] }} | {{ $student['hobi'] }}</div>
 

@@ -12,80 +12,102 @@
     }
 
     .container {
+        max-width: 1000px;
+        margin: auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 12px;
+        border: 1px solid #ccc;
+    }
+
+    .profile-list {
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
         gap: 20px;
+        justify-content: space-between;
+    }
+
+    .profile-link {
+        text-decoration: none;
+        color: inherit;
+        width: calc(50% - 10px);
     }
 
     .profile-card {
-        background: white;
-        border: 1px solid #ccc;
-        border-radius: 15px;
-        padding: 20px;
-        width: 250px;
-        text-align: center;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    }
-
-    .profile-img {
-        width: 100px;
-        height: 100px;
-        background: #ccc;
-        border-radius: 50%;
-        margin-bottom: 10px;
-        object-fit: cover;
-    }
-
-    .username {
-        color: #888;
-        margin: 5px 0;
-        font-size: 14px;
-    }
-
-    .name {
-        margin: 0;
-        font-size: 18px;
-        font-weight: bold;
-    }
-
-    .info {
-        font-size: 14px;
-        color: #555;
-    }
-
-    .desc {
-        margin: 10px 0;
-        font-size: 13px;
-    }
-
-    .buttons button {
-        margin: 5px;
-        padding: 8px 15px;
-        background: #ddd;
-        border: none;
-        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        padding: 15px;
+        width: 100%;
+        height: 180px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        box-sizing: border-box;
+        gap: 10px;
+        transition: border 0.3s ease, background 0.3s;
         cursor: pointer;
     }
 
-    .buttons button:hover {
-        background: #bbb;
+    .profile-card:hover {
+        border: 2px solid #3320be;
+        background-color: #f9f9ff;
+    }
+
+    .profile-top {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .profile-img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        background-color: #ccc;
+    }
+
+    .profile-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .profile-info h3 {
+        margin: 0;
+        font-size: 1.1em;
+        font-weight: bold;
+    }
+
+    .profile-info .username {
+        margin: 4px 0;
+        font-size: 0.9em;
+        color: #777;
+    }
+
+    .desc {
+        font-size: 0.85em;
+        color: #333;
+        display: flex;
     }
 </style>
 
 <div class="container">
-@foreach ($students as $student)
-        <div class="profile-card">
-        <img src="{{ $student['foto'] }}" alt="{{ $student['nama'] }}" class="profile-img">
-        <p class="name">{{ $student['nama'] }} </p>
-        <p class="info">{{ $student['kelas'] }} | {{ $student['hobi'] }}</p>
-        <p class="desc">{{ $student['deskripsi'] }}</p>
-        <div class="buttons">
-            <a href="/students/{{ $student['id'] }}">
-            <button>View Profile</button>
-            </a>
-        </div>
+    <div class="profile-list">
+        @foreach($students as $student)
+        <a href="/students/{{ $student['id'] }}" class="profile-link">
+            <div class="profile-card {{ $loop->first ? 'highlight' : '' }}">
+                <div class="profile-top">
+                    <img src="{{ $student['foto'] }}" alt="Foto {{ $student['nama'] }}" class="profile-img">
+                    <div class="profile-info">
+                        <h3>{{ $student['nama'] }}</h3>
+                        <p class="username">{{ $student['username'] }}</p>
+                    </div>
+                </div>
+                <p class="desc">{{ $student['deskripsi'] }}</p>
+            </div>
+        </a>
+        @endforeach
     </div>
-@endforeach
 </div>
 @endsection
